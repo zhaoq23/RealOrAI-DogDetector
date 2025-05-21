@@ -7,7 +7,7 @@
 1. [Problem Statement](#problem-statement)
 2. [Data](#data)
 3. [Methodology](#methodology)<br>
-	3.1. [Required Packages](#required-packages)<br>
+	3.1. [Environment Setup](#environment-setup)<br>
 	3.2. [Load and Preprocess Data](#load-and-preprocess-data)<br>
 	3.3. [Load Pre-Trained Vision Transformer (ViT) and Extract Features](#load-pre-trained-vision-transformer-vit-and-extract-features)<br>
 	3.4. [Train-Test Split and DataLoader Creation](#train-test-split-and-dataloader-creation)<br>
@@ -27,6 +27,10 @@ AI-generated content is getting eerily real, especially with last week’s relea
 
 This project uses Bayesian modeling to sniff out whether a dog image is real or AI-generated. The goal is to build a model that doesn’t just predict—but shows us how sure it is, and why.
 
+<insert more sumamries once code is done, on specific approaches used)
+
+
+
 # Data
 <a href='[https://www.kaggle.com/datasets/kaustubhdhote/human-faces-dataset](https://www.kaggle.com/datasets/albertobircoci/ai-generated-dogs-jpg-vs-real-dogs-jpg)'>Kaggle dataset</a> contains a directory with real and AII generated dog images. The data is organized into three main subsets: Train, Validation, and Test. 
 
@@ -34,8 +38,18 @@ Each subset contains two subdirectories: Images and Labels. The Labels folder in
 
 # Methodology
 
-enter here
+## Environment Setup
+```
+import os
+from PIL import Image
+from tqdm import tqdm
+import torch
+from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms
+from transformers import AutoFeatureExtractor, AutoModel
+```
+We use Hugging Face's transformers library to import an image feature extractor and model backbone. This allows for efficient transfer learning and avoids training a deep CNN from scratch.
 
 # Results
 
-enter here
+<insert more once done>
