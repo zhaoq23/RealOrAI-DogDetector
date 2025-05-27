@@ -14,18 +14,18 @@
 	3.5. [Train Bayesian MLP and evaluate](#train-bayesian-mlp-and-evaluate)<br>
 	3.6. [Precompute feature tensors](#precompute-feature-tensors)<br>
 4. [Results](#results)
+5. [Final Takeaways and Next Steps](#final-takeaways-and-next-steps)
 
 # Problem Statement
 
-AI-generated content is getting eerily real, especially with the recent release of Google Veo3, which can now generate hyper-realistic videos. 
+AI-generated content is getting eerily real, especially with the recent release of Google Veo3, which can now generate hyper-realistic videos.
 
 This project aims to classify real dog images vs. AI-generated dog images using a combination of deep learning feature extraction, enhanced input processing, and Bayesian modeling to incorporate uncertainty in predictions. Specifically, our goals include:
 
-- Build a reliable classifier to distinguish between real and AI-generated dog images.
-- Enhance model performance through feature engineering (e.g., edge channel).
-- Use Bayesian methods for uncertainity-aware predictions.
-- Evaluate multiple models (CNN baseline, MLP variants with basic and engineered features) using consistent feature sets.
-
+   - Build a reliable classifier to distinguish between real and AI-generated dog images.
+   - Enhance model performance through feature engineering (e.g., edge channel).
+   - Use Bayesian methods for uncertainty-aware predictions.
+   - Evaluate multiple models (CNN baseline, MLP variants with basic and engineered features) using consistent feature sets.
 
 # Data and Repository Structure 
 ## Data
@@ -42,7 +42,9 @@ Our GitHub repository is organized as follows:
 | `enhanced_bayesian_mlp.ipynb`| Add edge channel to images (RGBA)            |
 | `cnn_method_exploration.ipynb`| CNN experiments using ResNet50              |
 | `train_bayesian_mlp.ipynb`   | Train and evaluate Bayesian MLP              |
-| `features_train_*.pt`        | Precomputed train feature tensors            |
+| `features_train_*.pt`        | Precomputed feature tensors (train set)           |
+| `features_val_*.pt`          | Precomputed feature tensors (validation set)            |
+| `features_test_*.pt`         | Precomputed feature tensors (test set)         |
 | `baseline_model.pt`          | Trained model on base features               |
 | `plusdiff_model.pt`          | Trained model on enhanced (plus) features    |
 
@@ -54,7 +56,7 @@ This project followed a structured yet flexible approach to solving the problem 
 
 ## Environment setup
 
-We use Hugging Face's transformers library to import an image feature extractor and model backbone. This allows for efficient transfer learning and avoids training a deep CNN from scratch.
+We use Hugging Face's transformers library to import an image feature extractor and model backbone for efficient transfer learning.
 
 ```
 import os
@@ -104,9 +106,10 @@ We compared two types: a standard MLP and a Bayesian version that uses dropout t
 
 These models didn’t operate on raw images—they were trained on precomputed feature tensors (either from RGB images or the edge-enhanced RGBA ones).
    - The baseline MLP trained on regular RGB features achieved ~79% accuracy
-   - The Bayesian MLP added a bit of robustness and interpretability, but the big leap came when we fed it the enhanced (RGBA) features
-   - With the plus features, the Bayesian MLP hit ~86% accuracy and gave us confidence scores for each prediction
-   - This made it easier to spot borderline cases or flag predictions the model wasn’t sure about
+   - The Bayesian MLP added a bit of robustness and interpretability ~80% accuracy
+   - - The big leap came when we fed it the enhanced (RGBA) features. With the plus features, the Bayesian MLP hit ~86% accuracy and gave us confidence scores for each prediction
+       
+The Bayesian MLP (RGBA features) model made it easier to spot borderline cases or flag predictions the model wasn’t sure about.
 
 ## Precompute feature tensors 
 `features_train_*.pt`
@@ -140,4 +143,18 @@ The plusdiff model was the clear winner—it combined smart inputs with uncertai
 | Bayesian MLP  | `*_full.pt` | \~80%    | \~79%     | \~77%   | Slight boost + uncertainty |
 | **Bayesian MLP**  | **`*_plus.pt`** | **86%**  | **85%**   | **87%** | **Best overall performance**   |
 
+
+# Final Takeaways and Next Steps
+## Key Insights
+
+   - Adding edge-based features via Canny filters substantially improved model accuracy.
+   - CNNs are powerful for spatial pattern recognition but require interpretability tools like GradCAM.
+   - Bayesian MLPs offered competitive performance with interpretable confidence scores.
+
+## Recommendations
+
+   - Deploy plusdiff_model.pt for its strong balance of accuracy and interpretability.
+   - Build a web UI with prediction + uncertainty display for user trust.
+   - Explore temporal evolution of AI generation to continuously retrain models.
+   - Investigate additional synthetic image sources for robustness across generation styles.
 
