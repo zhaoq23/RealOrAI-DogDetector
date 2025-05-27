@@ -78,6 +78,16 @@ We started with `data_clean.ipynb`, which handled all the image preprocessing. W
 
 All images were transformed into normalized tensors, ready for CNNs or embedding extraction.
 
+## Simple MLP Model
+
+We use a simple Multi-Layer Perceptron (MLP) with two hidden layers (128 and 64 units) and dropout for regularization. The model takes 384-dimensional feature vectors as input and predicts whether an image is real or AI-generated.
+
+- **Input**: 384-d feature vector  
+- **Architecture**: Linear → ReLU → Dropout → Linear → ReLU → Dropout → Output
+- **Validation Accuracy**: 98.98%  
+- **Training Accuracy**: 98.72%  
+
+This model is efficient and performs well on extracted image features.
 
 ## Add edge channel to images 
 `Enhanced_Bayesian_MLP.ipynb`
