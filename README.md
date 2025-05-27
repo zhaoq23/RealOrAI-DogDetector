@@ -133,6 +133,7 @@ The features_train_plus.pt, features_val_plus.pt, and features_test_plus.pt file
 
 #### Figure: Original Images (Left) and Salient Feature Focus Captured by the Enhanced Model (Right)
 ![image](https://github.com/user-attachments/assets/7c8b3ee9-ecbb-4a5e-983f-01410897a639)
+![image](https://github.com/user-attachments/assets/86f0d1f3-d765-49de-adef-6480dc475219)
 
 
 ## Widget
