@@ -140,6 +140,9 @@ The result is displayed with:
    - The inference pipeline needs to match the training preprocessing exactly (including feature embedding and input shape).
    - Future iterations will address fixing input handling by ensuring that all uploaded images pass through the same extract_features() function used in training.
 
+![Uploading Screenshot 2025-05-27 at 4.50.27 PM.png…]()
+
+
 # Results
 `baseline_model.pt`
 `plusdiff_model.pt`
