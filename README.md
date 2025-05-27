@@ -36,17 +36,19 @@ Each subset contains two subdirectories: Images and Labels. The Labels folder in
 ## Repository Structure
 Our GitHub repository is organized as follows:
 
-| Notebook/File                 | Purpose                                      |
-|------------------------------|----------------------------------------------|
-| `data_cleaning.ipynb`        | Load and preprocess image data               |
-| `enhanced_bayesian_mlp.ipynb`| Add edge channel to images (RGBA)            |
-| `cnn_method_exploration.ipynb`| CNN experiments using ResNet50              |
-| `train_bayesian_mlp.ipynb`   | Train and evaluate Bayesian MLP              |
-| `features_train_*.pt`        | Precomputed feature tensors (train set)           |
-| `features_val_*.pt`          | Precomputed feature tensors (validation set)            |
-| `features_test_*.pt`         | Precomputed feature tensors (test set)         |
-| `baseline_model.pt`          | Trained model on base features               |
-| `plusdiff_model.pt`          | Trained model on enhanced (plus) features    |
+
+RealOrAI-DogDetector/
+├── data_clean.ipynb                # Preprocesses and cleans image data
+├── Enhanced_Bayesian_MLP.ipynb    # Adds edge detection channel (RGBA) for better feature capture
+├── method_explore.ipynb           # Experiments with CNNs (e.g., ResNet50) and compares architectures
+├── Bayesian MLP Model_Train.ipynb # Trains a Bayesian MLP model with uncertainty estimation
+├── features_train_*.pt            # Precomputed feature tensors for training
+├── features_val_*.pt              # Precomputed feature tensors for validation
+├── features_test_*.pt             # Precomputed feature tensors for testing
+├── baseline_model.pt              # Trained baseline model using standard features
+├── plusdiff_model.pt              # Trained enhanced model using edge-aware features
+├── classify_new_image.ipynb       # Upload and classify your own dog image (real vs AI)
+└── README.md                      # This file
 
 
 
@@ -124,6 +126,19 @@ The features_train_plus.pt, features_val_plus.pt, and features_test_plus.pt file
    - The “plus” versions were consistently more effective than the originals
    - We also made “cutted” versions of these files with smaller samples to use for quick debugging
 
+## Widget
+`classify_new_image`
+
+To test new images, we created a simple file upload widget (ipywidgets.FileUpload) to enable drag-and-drop or select an image from your device. After uploading, the image is passed through a feature extraction pipeline, and classified using the trained model (baseline_model.pt or plusdiff_model.pt).
+
+The result is displayed with:
+   - A predicted label: "Real 🐶" or "AI-generated 🤖"
+   - A confidence score (between 0.00 and 1.00)
+
+#### Known Limitations 
+   - Currently, uploaded images always return “Real 🐶” with 0.00 confidence, due to a mismatch between the uploaded image format and what the model expects.
+   - The inference pipeline needs to match the training preprocessing exactly (including feature embedding and input shape).
+   - Future iterations will address fixing input handling by ensuring that all uploaded images pass through the same extract_features() function used in training.
 
 # Results
 `baseline_model.pt`
@@ -137,24 +152,23 @@ The baseline model worked fine, but felt a little limited in its ability to spot
 
 The plusdiff model was the clear winner—it combined smart inputs with uncertainty modeling, and it performed best across all metrics. This is the model we would deploy or build a UI around, especially since it offers both prediction and confidence.
 
-| Model Variant | Feature Set | Accuracy | Precision | Recall  | Comments                   |
-| ------------- | ----------- | -------- | --------- | ------- | -------------------------- |
-| Baseline MLP  | `*_full.pt` | \~79%    | \~78%     | \~76%   | Basic performance          |
-| Bayesian MLP  | `*_full.pt` | \~80%    | \~79%     | \~77%   | Slight boost + uncertainty |
-| **Bayesian MLP**  | **`*_plus.pt`** | **86%**  | **85%**   | **87%** | **Best overall performance**   |
+| **Model Name**      | **Feature Set**                       | **Accuracy** | **Precision** | **Recall** | **Comments**                                                                        |
+| ------------------- | ------------------------------------- | ------------ | ------------- | ---------- | ----------------------------------------------------------------------------------- |
+| `baseline_model.pt` | CLIP embeddings                       | 98.3%        | 98.2%         | 98.1%      | Performs well on standard features, slightly lower generalization on edge cases.    |
+| `plusdiff_model.pt` | CLIP embeddings + RGBA edge detection | 99.1%        | 99.0%         | 99.0%      | Best performance overall. Edge detection helps improve AI image detection accuracy. |
+
+
 
 
 # Final Takeaways and Next Steps
 ## Key Insights
 
-   - Adding edge-based features via Canny filters substantially improved model accuracy.
-   - CNNs are powerful for spatial pattern recognition but require interpretability tools like GradCAM.
-   - Bayesian MLPs offered competitive performance with interpretable confidence scores.
+   - The plusdiff model, which combines CLIP embeddings with RGBA edge detection, showed the strongest performance with over 99% accuracy, precision, and recall.
+   - Adding edge-based features helped the model better detect subtle patterns often missed in AI-generated images, especially around fur texture and outlines.
+   - The baseline model still performed well, but struggled slightly more with edge cases and synthetic artifacts.
 
-## Recommendations
+## What's Next?
+   - Fix inference for uploaded images. Uploaded images currently return "Real" with 0 confidence due to preprocessing mismatches. Ensuring consistent feature extraction between training and inference should resolve this.
+   - Expand the dataset to introduce more variety in dog breeds, image resolutions, and generative models to improve robustness.
 
-   - Deploy plusdiff_model.pt for its strong balance of accuracy and interpretability.
-   - Build a web UI with prediction + uncertainty display for user trust.
-   - Explore temporal evolution of AI generation to continuously retrain models.
-   - Investigate additional synthetic image sources for robustness across generation styles.
 
