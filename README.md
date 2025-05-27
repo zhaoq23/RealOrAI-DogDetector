@@ -37,9 +37,10 @@ Each subset contains two subdirectories: Images and Labels. The Labels folder in
 ## Repository Structure
 Our GitHub repository is organized as follows:
 
+![1748384438508](https://github.com/user-attachments/assets/d817e3c6-8e28-49dd-acd0-af1b32aad870)
 
 RealOrAI-DogDetector/
-├── data_clean.ipynb                # Preprocesses and cleans image data
+├── data_clean.ipynb               # Preprocesses and cleans image data
 ├── Enhanced_Bayesian_MLP.ipynb    # Adds edge detection channel (RGBA) for better feature capture
 ├── method_explore.ipynb           # Experiments with CNNs (e.g., ResNet50) and compares architectures
 ├── Bayesian MLP Model_Train.ipynb # Trains a Bayesian MLP model with uncertainty estimation
@@ -50,7 +51,6 @@ RealOrAI-DogDetector/
 ├── plusdiff_model.pt              # Trained enhanced model using edge-aware features
 ├── classify_new_image.ipynb       # Upload and classify your own dog image (real vs AI)
 └── README.md                      # This file
-
 
 
 # Methodology
@@ -88,6 +88,10 @@ Next, we introduced edge detection to the images. Using Canny filters, we create
    - Saved new image features as .pt tensors for fast reuse later
    - Models trained on these “plus” features saw a ~6–7% bump in accuracy, especially when distinguishing subtle fakes
 
+#### Figure: Grad-CAM Heatmaps Revealing Model Attention Across Real and AI-Generated Dog Images
+![output](https://github.com/user-attachments/assets/6fdd6c85-adb7-456d-af1a-0792cb0cf90b)
+
+   - The heatmaps illustrate the regions the model focused on when classifying dog images across four prediction types. The model consistently attends to key visual features such as the nose, eyes, ears, and fur texture—suggesting it relies on these areas to distinguish between real and AI-generated dogs, regardless of classification correctness.
 
 ## CNN model experiments 
 `method_explore.ipynb`
@@ -127,6 +131,10 @@ The features_train_plus.pt, features_val_plus.pt, and features_test_plus.pt file
    - The “plus” versions were consistently more effective than the originals
    - We also made “cutted” versions of these files with smaller samples to use for quick debugging
 
+#### Figure: Original Images (Left) and Salient Feature Focus Captured by the Enhanced Model (Right)
+![image](https://github.com/user-attachments/assets/7c8b3ee9-ecbb-4a5e-983f-01410897a639)
+
+
 ## Widget
 `classify_new_image`
 
@@ -160,6 +168,9 @@ The plusdiff model was the clear winner—it combined smart inputs with uncertai
 | ------------------- | ------------------------------------- | ------------ | ------------- | ---------- | ----------------------------------------------------------------------------------- |
 | `baseline_model.pt` | CLIP embeddings                       | 98.3%        | 98.2%         | 98.1%      | Performs well on standard features, slightly lower generalization on edge cases.    |
 | `plusdiff_model.pt` | CLIP embeddings + RGBA edge detection | 99.1%        | 99.0%         | 99.0%      | Best performance overall. Edge detection helps improve AI image detection accuracy. |
+
+#### Figure: Accuracy Comparison between Baseline Model and Enhanced Model
+![image](https://github.com/user-attachments/assets/1667047e-1716-4538-907e-4f735e145ed3)
 
 
 # Final Takeaways and Next Steps
