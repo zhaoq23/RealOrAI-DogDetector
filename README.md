@@ -13,6 +13,7 @@
 	3.4. [CNN model experiments](#cnn-model-experiments)<br>
 	3.5. [Train Bayesian MLP and evaluate](#train-bayesian-mlp-and-evaluate)<br>
 	3.6. [Precompute feature tensors](#precompute-feature-tensors)<br>
+ 	3.7. [Widget](#widget)<br>
 4. [Results](#results)
 5. [Final Takeaways and Next Steps](#final-takeaways-and-next-steps)
 
@@ -140,7 +141,7 @@ The result is displayed with:
    - The inference pipeline needs to match the training preprocessing exactly (including feature embedding and input shape).
    - Future iterations will address fixing input handling by ensuring that all uploaded images pass through the same extract_features() function used in training.
 
-![Uploading Screenshot 2025-05-27 at 4.50.27 PM.png…]()
+<img width="615" alt="Screenshot 2025-05-27 at 4 50 27 PM" src="https://github.com/user-attachments/assets/af881527-a286-461c-b304-8b982d0225df" />
 
 
 # Results
@@ -159,8 +160,6 @@ The plusdiff model was the clear winner—it combined smart inputs with uncertai
 | ------------------- | ------------------------------------- | ------------ | ------------- | ---------- | ----------------------------------------------------------------------------------- |
 | `baseline_model.pt` | CLIP embeddings                       | 98.3%        | 98.2%         | 98.1%      | Performs well on standard features, slightly lower generalization on edge cases.    |
 | `plusdiff_model.pt` | CLIP embeddings + RGBA edge detection | 99.1%        | 99.0%         | 99.0%      | Best performance overall. Edge detection helps improve AI image detection accuracy. |
-
-
 
 
 # Final Takeaways and Next Steps
