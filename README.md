@@ -190,7 +190,6 @@ The plusdiff model was the clear winner—it combined smart inputs with uncertai
    - The baseline model still performed well, but struggled slightly more with edge cases and synthetic artifacts.
 
 ## What's Next?
-   - Fix inference for uploaded images. Uploaded images currently return "Real" with 0 confidence due to preprocessing mismatches. Ensuring consistent feature extraction between training and inference should resolve this.
    - Expand the dataset to introduce more variety in dog breeds, image resolutions, and generative models to improve robustness.
 
 
