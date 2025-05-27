@@ -7,10 +7,10 @@
 1. [Problem Statement](#problem-statement)
 2. [Data and Repository Structure](#data-and-repository-structure)
 3. [Methodology](#methodology)<br>
-	3.1. [Environment Setup](#environment-setup)<br>
+	3.1. [Environment setup](#environment-setup)<br>
 	3.2. [Load and preprocess image data](#load-and-preprocess-image-data)<br>
 	3.3. [Add edge channel to images](#add-edge-channel-to-images)<br>
-	3.4. [CNN model experiments)](#cnn-model-experiments)<br>
+	3.4. [CNN model experiments](#cnn-model-experiments)<br>
 	3.5. [Train Bayesian MLP and evaluate](#train-bayesian-mlp-and-evaluate)<br>
 	3.6. [Precompute feature tensors](#precompute-feature-tensors)<br>
 4. [Results](#results)
@@ -36,17 +36,16 @@ Each subset contains two subdirectories: Images and Labels. The Labels folder in
 ## Repository Structure
 Our GitHub repository is organized as follows:
 
-```
-├── data_clean.ipynb                 # Load and preprocess image data
-├── Enhanced_Bayesian_MLP.ipynb      # Add edge channel to images (RGBA)
-├── method_explore.ipynb             # CNN model experiments (e.g., ResNet50)
-├── Bayesian MLP Model_Train.ipynb   # Train Bayesian MLP and evaluates it
-├── features_train_*.pt              # Precompute feature tensors (train set)
-├── features_val_*.pt                # Precompute feature tensors (validation set)
-├── features_test_*.pt               # Precompute feature tensors (test set)
-├── baseline_model.pt                # Train model using base features
-├── plusdiff_model.pt                # Train model using enhanced (plus) features
-```
+| Notebook/File                 | Purpose                                      |
+|------------------------------|----------------------------------------------|
+| `data_cleaning.ipynb`        | Load and preprocess image data               |
+| `enhanced_bayesian_mlp.ipynb`| Add edge channel to images (RGBA)            |
+| `cnn_method_exploration.ipynb`| CNN experiments using ResNet50              |
+| `train_bayesian_mlp.ipynb`   | Train and evaluate Bayesian MLP              |
+| `features_train_*.pt`        | Precomputed train feature tensors            |
+| `baseline_model.pt`          | Trained model on base features               |
+| `plusdiff_model.pt`          | Trained model on enhanced (plus) features    |
+
 
 
 # Methodology
@@ -70,7 +69,7 @@ from transformers import AutoFeatureExtractor, AutoModel
 ## Load and preprocess image data
 `data_clean.ipynb`
 
-We started with `data_clean.ipynb`, which handled all the image preprocessing. We oaded our dataset of real and fake dog images, resized them to 224x224 pixels, normalized them using standard ImageNet stats, and wrapped everything in PyTorch Dataloaders. This gave us a clean, consistent input pipeline to use across all the different modeling approaches.
+We started with `data_clean.ipynb`, which handled all the image preprocessing. We loaded our dataset of real and fake dog images, resized them to 224x224 pixels, normalized them using standard ImageNet stats, and wrapped everything in PyTorch Dataloaders. This gave us a clean, consistent input pipeline to use across all the different modeling approaches.
 
 All images were transformed into normalized tensors, ready for CNNs or embedding extraction.
 
