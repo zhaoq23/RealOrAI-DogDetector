@@ -156,13 +156,10 @@ The result is displayed with:
    - A predicted label: "Real 🐶" or "AI-generated 🤖"
    - A confidence score (between 0.00 and 1.00)
 
-#### Known Limitations 
-   - Currently, uploaded images always return “Real 🐶” with 0.00 confidence, due to a mismatch between the uploaded image format and what the model expects.
-   - The inference pipeline needs to match the training preprocessing exactly (including feature embedding and input shape).
-   - Future iterations will address fixing input handling by ensuring that all uploaded images pass through the same extract_features() function used in training.
+<img width="615" alt="Screenshot 2025-05-27 at 6 17 41 PM" src="https://github.com/user-attachments/assets/34787372-dc11-42a4-b1fc-86b0d6bc52f2" />
 
-<img width="615" alt="Screenshot 2025-05-27 at 4 50 27 PM" src="https://github.com/user-attachments/assets/af881527-a286-461c-b304-8b982d0225df" />
 
+<img width="337" alt="Screenshot 2025-05-27 at 6 17 57 PM" src="https://github.com/user-attachments/assets/cea637f2-4f30-4423-bdc5-e09638f4af00" />
 
 # Results
 `baseline_model.pt`
