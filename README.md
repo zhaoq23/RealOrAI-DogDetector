@@ -80,6 +80,8 @@ All images were transformed into normalized tensors, ready for CNNs or embedding
 
 ## Simple MLP Model
 
+`Simple_MLP.ipynb`
+
 We use a simple Multi-Layer Perceptron (MLP) with two hidden layers (128 and 64 units) and dropout for regularization. The model takes 384-dimensional feature vectors as input and predicts whether an image is real or AI-generated.
 
 - **Input**: 384-d feature vector  
@@ -88,6 +90,20 @@ We use a simple Multi-Layer Perceptron (MLP) with two hidden layers (128 and 64 
 - **Training Accuracy**: 98.72%  
 
 This model is efficient and performs well on extracted image features.
+
+## Train Bayesian MLP and evaluate
+`Bayesian MLP Model_Train.ipynb`
+
+Once we had features extracted from the images, we trained our classifiers. 
+
+We compared two types: a standard MLP and a Bayesian version that uses dropout to estimate uncertainty. 
+
+These models didn’t operate on raw images—they were trained on precomputed feature tensors (either from RGB images or the edge-enhanced RGBA ones).
+   - The baseline MLP trained on regular RGB features achieved ~79% accuracy
+   - The Bayesian MLP added a bit of robustness and interpretability ~80% accuracy
+   - - The big leap came when we fed it the enhanced (RGBA) features. With the plus features, the Bayesian MLP hit ~86% accuracy and gave us confidence scores for each prediction
+       
+The Bayesian MLP (RGBA features) model made it easier to spot borderline cases or flag predictions the model wasn’t sure about.
 
 ## Add edge channel to images 
 `Enhanced_Bayesian_MLP.ipynb`
@@ -112,21 +128,6 @@ To establish a benchmark, we fine-tuned a pretrained ResNet50. This was our stro
    - GradCAM++ showed that for real dogs, attention centered on ears, snouts, and fur texture
    - For fake dogs, the heatmaps were scattered—often lighting up irrelevant background or oddly shaped limbs
    - These visuals confirmed that even CNNs were picking up on the awkwardness of AI images
-
-
-## Train Bayesian MLP and evaluate
-`Bayesian MLP Model_Train.ipynb`
-
-Once we had features extracted from the images, we trained our classifiers. 
-
-We compared two types: a standard MLP and a Bayesian version that uses dropout to estimate uncertainty. 
-
-These models didn’t operate on raw images—they were trained on precomputed feature tensors (either from RGB images or the edge-enhanced RGBA ones).
-   - The baseline MLP trained on regular RGB features achieved ~79% accuracy
-   - The Bayesian MLP added a bit of robustness and interpretability ~80% accuracy
-   - - The big leap came when we fed it the enhanced (RGBA) features. With the plus features, the Bayesian MLP hit ~86% accuracy and gave us confidence scores for each prediction
-       
-The Bayesian MLP (RGBA features) model made it easier to spot borderline cases or flag predictions the model wasn’t sure about.
 
 ## Precompute feature tensors 
 `features_train_*.pt`
