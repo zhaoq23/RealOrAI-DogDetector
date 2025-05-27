@@ -1,52 +1,53 @@
 import torch
-from torchvision import transforms
-from PIL import Image
 import argparse
+from PIL import Image
+from torchvision import transforms
+from models import BayesianMLP  # Make sure this is the correct import based on your repo
 import os
 
-# Load the trained model
-MODEL_PATH = 'plusdiff_model.pt'  # Or baseline_model.pt if preferred
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# Load image and preprocess it like in training
+def preprocess_image(image_path):
+    transform = transforms.Compose([
+        transforms.Resize((224, 224)),
+        transforms.ToTensor(),
+    ])
+    image = Image.open(image_path).convert("RGB")
+    return transform(image).unsqueeze(0)  # Add batch dimension
 
-# Label map (update if your labels differ)
-LABELS = {0: "Real Dog", 1: "AI-generated Dog"}
-
-# Image preprocessing (matches Enhanced_Bayesian_MLP preprocessing)
-transform = transforms.Compose([
-    transforms.Resize((224, 224)),  # Adjust if your model expects another size
-    transforms.ToTensor(),
-])
-
-def load_model(model_path):
-    model = torch.load(model_path, map_location=DEVICE)
+# Predict using loaded model
+def classify_image(model, image_tensor, device):
     model.eval()
+    with torch.no_grad():
+        image_tensor = image_tensor.to(device)
+        output = model(image_tensor)
+        prediction = torch.argmax(output, dim=1).item()
+        return "REAL" if prediction == 0 else "AI-GENERATED"
+
+def load_model(model_path, device):
+    model = BayesianMLP()
+    model.load_state_dict(torch.load(model_path, map_location=device))
+    model.to(device)
     return model
 
-def predict_image(model, image_path):
-    image = Image.open(image_path).convert("RGB")
-    image_tensor = transform(image).unsqueeze(0).to(DEVICE)
-    
-    with torch.no_grad():
-        output = model(image_tensor)
-        prob = torch.softmax(output, dim=1)
-        pred_label = prob.argmax(dim=1).item()
-    
-    return LABELS[pred_label], prob.squeeze().tolist()
-
-def main():
-    parser = argparse.ArgumentParser(description="Classify an image as Real or AI-generated.")
-    parser.add_argument("image_path", type=str, help="Path to image file")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Classify an image as Real or AI-generated Dog.")
+    parser.add_argument("image_path", type=str, help="Path to the image you want to classify")
+    parser.add_argument("--model", type=str, default="plusdiff_model.pt", help="Path to the trained model")
     args = parser.parse_args()
 
+    # Device
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # Load image
     if not os.path.exists(args.image_path):
-        print("❌ Error: Image file not found.")
-        return
+        print(f"Error: Image file not found at {args.image_path}")
+        exit(1)
 
-    model = load_model(MODEL_PATH)
-    label, probabilities = predict_image(model, args.image_path)
-    
-    print(f"\n🖼️  Prediction: {label}")
-    print(f"🔢 Probabilities: Real = {probabilities[0]:.4f}, AI = {probabilities[1]:.4f}\n")
+    image_tensor = preprocess_image(args.image_path)
 
-if __name__ == "__main__":
-    main()
+    # Load model
+    model = load_model(args.model, device)
+
+    # Classify
+    result = classify_image(model, image_tensor, device)
+    print(f"\nPrediction: {result}\n")
