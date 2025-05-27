@@ -1,0 +1,52 @@
+import torch
+from torchvision import transforms
+from PIL import Image
+import argparse
+import os
+
+# Load the trained model
+MODEL_PATH = 'plusdiff_model.pt'  # Or baseline_model.pt if preferred
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Label map (update if your labels differ)
+LABELS = {0: "Real Dog", 1: "AI-generated Dog"}
+
+# Image preprocessing (matches Enhanced_Bayesian_MLP preprocessing)
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),  # Adjust if your model expects another size
+    transforms.ToTensor(),
+])
+
+def load_model(model_path):
+    model = torch.load(model_path, map_location=DEVICE)
+    model.eval()
+    return model
+
+def predict_image(model, image_path):
+    image = Image.open(image_path).convert("RGB")
+    image_tensor = transform(image).unsqueeze(0).to(DEVICE)
+    
+    with torch.no_grad():
+        output = model(image_tensor)
+        prob = torch.softmax(output, dim=1)
+        pred_label = prob.argmax(dim=1).item()
+    
+    return LABELS[pred_label], prob.squeeze().tolist()
+
+def main():
+    parser = argparse.ArgumentParser(description="Classify an image as Real or AI-generated.")
+    parser.add_argument("image_path", type=str, help="Path to image file")
+    args = parser.parse_args()
+
+    if not os.path.exists(args.image_path):
+        print("❌ Error: Image file not found.")
+        return
+
+    model = load_model(MODEL_PATH)
+    label, probabilities = predict_image(model, args.image_path)
+    
+    print(f"\n🖼️  Prediction: {label}")
+    print(f"🔢 Probabilities: Real = {probabilities[0]:.4f}, AI = {probabilities[1]:.4f}\n")
+
+if __name__ == "__main__":
+    main()
