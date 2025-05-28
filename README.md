@@ -67,20 +67,34 @@ We provide two versions of the dataset:
 ## Repository Structure
 Our GitHub repository is organized as follows:
 
-![1748384438508](https://github.com/user-attachments/assets/d817e3c6-8e28-49dd-acd0-af1b32aad870)
-
 RealOrAI-DogDetector/
-├── data_clean.ipynb               # Preprocesses and cleans image data
-├── Enhanced_Bayesian_MLP.ipynb    # Adds edge detection channel (RGBA) for better feature capture
-├── method_explore.ipynb           # Experiments with CNNs (e.g., ResNet50) and compares architectures
-├── Bayesian MLP Model_Train.ipynb # Trains a Bayesian MLP model with uncertainty estimation
-├── features_train_*.pt            # Precomputed feature tensors for training
-├── features_val_*.pt              # Precomputed feature tensors for validation
-├── features_test_*.pt             # Precomputed feature tensors for testing
-├── baseline_model.pt              # Trained baseline model using standard features
-├── plusdiff_model.pt              # Trained enhanced model using edge-aware features
-├── classify_new_image.ipynb       # Upload and classify your own dog image (real vs AI)
-└── README.md                      # This file
+├── 1_data_process.ipynb             # Preprocesses image data and extracts features
+├── 2_Simple_MLP.ipynb               # Trains a simple MLP classifier
+├── 3_Bayesian MLP Model_Train.ipynb # Trains a Bayesian MLP model with uncertainty estimation
+├── 4_method_explore.ipynb           # Explores CNN architectures (e.g., ResNet50) and compares methods
+├── 5_Enhanced_Bayesian_MLP.ipynb    # Adds edge detection (RGBA) for improved Bayesian performance
+├── 6_classify_new_image.ipynb       # Classifies a custom image (real vs AI-generated)
+├── models/
+│   ├── baseline_model.pt            # Trained baseline model with standard features
+│   └── plusdiff_model.pt            # Trained enhanced model with edge-aware features
+├── README.md                        # Project documentation (this file)
+
+
+- 📦 Feature Files
+
+Due to large file sizes, the **precomputed feature tensors** for training, validation, and testing are hosted externally.
+
+👉 [Click here to access the feature files on Google Drive](https://drive.google.com/drive/folders/1gDfxVEp0vZ-3u6BigSQOoL-PjhERqRJq?usp=drive_link)
+
+The available files include:
+
+- `features_train_*.pt` – Precomputed features for training set  
+- `features_val_*.pt` – Precomputed features for validation set  
+- `features_test_*.pt` – Precomputed features for test set  
+
+To use:
+1. Download the `.pt` files from the Google Drive link above.
+2. Place them in the root directory or update the paths in the notebooks accordingly.
 
 
 # Methodology
