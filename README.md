@@ -79,7 +79,7 @@ RealOrAI-DogDetector/
 │   ├── baseline_model.pt          # Trained baseline model with standard features
 │   └── plusdiff_model.pt          # Trained enhanced model with edge-aware features
 └── README.md                      # Project documentation (this file)
-
+```
 
 - 📦 Feature Files
 
