@@ -148,7 +148,7 @@ This model is efficient and performs well on extracted image features.
 ## Train Bayesian MLP and evaluate
 `Bayesian MLP Model_Train.ipynb`
 
-Once we had features extracted from the images, we trained our classifiers. This would served as our baseline models.
+Once we had features extracted from the images, we trained our classifiers. This would served as our baseline model.
 
 We compared two types: a standard MLP and a Bayesian version that uses dropout to estimate uncertainty. 
 
@@ -159,7 +159,7 @@ These models didn’t operate on raw images—they were trained on precomputed f
        
 The Bayesian MLP (RGBA features) model made it easier to spot borderline cases or flag predictions the model wasn’t sure about.
 
-## 🧠 CNN Model Experiments (End-to-End Models with ResNet50)
+## CNN Model Experiments (End-to-End Models with ResNet50)
 `method_explore.ipynb`
 
 To go beyond the DINO+MLP baseline, we explored a series of **end-to-end CNN models** based on **ResNet50**. Unlike our MLP models that rely on pre-extracted features, these CNNs **learn directly from images**, combining feature extraction and classification in one pipeline.
@@ -196,8 +196,8 @@ Next, we introduced edge detection to the images. Using Canny filters, we create
    - Models trained on these “plus” features saw a ~6–7% bump in accuracy, especially when distinguishing subtle fakes
 
 #### Figure: Original Images (Left) and Salient Feature Focus Captured by the Enhanced Model (Right)
-![image](https://github.com/user-attachments/assets/7c8b3ee9-ecbb-4a5e-983f-01410897a639)
-![image](https://github.com/user-attachments/assets/86f0d1f3-d765-49de-adef-6480dc475219)
+<img src="https://github.com/user-attachments/assets/7c8b3ee9-ecbb-4a5e-983f-01410897a639" width="400" height="300"/>
+<img src="https://github.com/user-attachments/assets/86f0d1f3-d765-49de-adef-6480dc475219" width="400" height="300"/>
 
 
 ## Widget
