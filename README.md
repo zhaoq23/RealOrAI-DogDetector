@@ -30,7 +30,8 @@ This project aims to classify real dog images vs. AI-generated dog images using 
 
 # Difference
 
-** Lack of Sensor Noise in AI-Generated Dog Images ** Inspired by the work of Nightingale and Farid (2022), we find that AI-generated dog images often show inconsistencies in local features such as mismatched eyes or ears. These artifacts are uncommon in real dog photos and help our model distinguish between real and generated images.
+**Lack of Sensor Noise in AI-Generated Dog Images**  
+Inspired by the work of Nightingale and Farid (2022), we find that AI-generated dog images often show inconsistencies in local features such as missing legs. These artifacts are uncommon in real dog photos and help our model distinguish between real and generated images.
 
 ![IMG_5167](https://github.com/user-attachments/assets/593eef45-dfdb-4bb0-b803-853a7445ad5a)
 
