@@ -4,23 +4,25 @@
 <img src="https://i.ytimg.com/vi/b7rB7VFl_I4/maxresdefault.jpg" alt="Dog vs Robot" width="400"/>
 
 # Table of Contents
-1. [Problem Statement](#problem-statement)
-   	1.1 [Introduction](#introduction)
-   	1.2 [Distinguishing Real and AI-Generated Dog Images](#distinguishing-real-and-ai-generated-dog=images)
-2. [Data and Repository Structure](#data-and-repository-structure)
-   	2.1 [Dataset Structure](#data-structure)
-   	2.2 [Dataset Statistics](#data-statistics)
-   	2.3 [Repository Structure](#repository-structure) 
-5. [Methodology](#methodology)<br>
+1. [Problem Statement](#problem-statement)<br>
+   	1.1. [Introduction](#introduction)<br>
+   	1.2. [Distinguishing Real and AI-Generated Dog Images](#distinguishing-real-and-ai-generated-dog=images)<br>
+2. [Data and Repository Structure](#data-and-repository-structure)<br>
+   	2.1. [Dataset Structure](#data-structure)<br>
+   	2.2. [Dataset Statistics](#data-statistics)<br>
+   	2.3. [Repository Structure](#repository-structure)<br>
+3. [Methodology](#methodology)<br>
 	3.1. [Environment setup](#environment-setup)<br>
-	3.2. [Load and preprocess image data](#load-and-preprocess-image-data)<br>
-	3.3. [Add edge channel to images](#add-edge-channel-to-images)<br>
-	3.4. [CNN model experiments](#cnn-model-experiments)<br>
-	3.5. [Train Bayesian MLP and evaluate](#train-bayesian-mlp-and-evaluate)<br>
-	3.6. [Precompute feature tensors](#precompute-feature-tensors)<br>
+	3.2. [Preprocess image data & Precompute feature tensors](#preprocess-image-data&precompute-feature-tensors)<br>
+ 	3.3. [Simple MLP Model](#simple-mlp-model)<br>
+ 	3.4. [Train Bayesian MLP and evaluate](#train-bayesian-mlp-and-evaluate)<br>
+	3.5. [CNN Model Experiments (End-to-End Models with ResNet50)](#cnn-model-experiments)<br>
+	3.6. [Enhanced MLP with Leg-Based Feature (Final Model)](#enhanced-mlp-with-leg-based-feature)<br>
  	3.7. [Widget](#widget)<br>
-6. [Results](#results)
-7. [Final Takeaways and Next Steps](#final-takeaways-and-next-steps)
+5. [Results](#results)
+6. [Final Takeaways and Next Steps](#final-takeaways-and-next-steps)
+   	5.1 [Key Insights](#key-insights)<br>
+    	5.2 [What's Next?](#what's-next?)<br>
 
 # Problem Statement
 ## Introduction
@@ -112,14 +114,13 @@ from torchvision import transforms
 from transformers import AutoFeatureExtractor, AutoModel
 ```
 
-## Load and preprocess image data
+## Preprocess image data & Precompute feature tensors 
 `Data_Process.ipynb`
 
 We started with `data_clean.ipynb`, which handled all the image preprocessing. We loaded our dataset of real and fake dog images, resized them to 224x224 pixels, normalized them using standard ImageNet stats, and wrapped everything in PyTorch Dataloaders. This gave us a clean, consistent input pipeline to use across all the different modeling approaches.
 
 All images were transformed into normalized tensors, ready for CNNs or embedding extraction.
 
-## Precompute feature tensors 
 `features_train_*.pt`
 `features_val_*.pt `
 `features_test_*.pt`
