@@ -214,7 +214,7 @@ Given these challenges, we reverted to our **Bayesian MLP baseline** and focused
 This lightweight enhancement yielded strong results:
 - Validation accuracy: **99.13%**
 - ~30 more correctly classified samples compared to the vanilla MLP
-- Grad-CAM visualizations showed improved sensitivity to **subtle leg structures, facial features, and expression cues**
+- Region-based analysis revealed that the enhanced model is more sensitive to **subtle leg structures, fur texture, and body pose cues**.
 
 #### Figure: Original Images (Left) and Salient Feature Focus Captured by the Enhanced Model (Right)
 <img src="https://github.com/user-attachments/assets/7c8b3ee9-ecbb-4a5e-983f-01410897a639" width="400" height="850"/>
