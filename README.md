@@ -28,7 +28,7 @@ This project aims to classify real dog images vs. AI-generated dog images using 
    - Use Bayesian methods for uncertainty-aware predictions.
    - Evaluate multiple models (CNN baseline, MLP variants with basic and engineered features) using consistent feature sets.
 
-## Difference
+# Difference
 
 A study by Nightingale & Farid (2022) found that AI-generated faces are nearly indistinguishable from real ones, with human detection accuracy hovering around chance (50%). Even more surprisingly, participants rated synthetic faces as more trustworthy than real ones, highlighting the importance of robust detection tools like our model.
 
