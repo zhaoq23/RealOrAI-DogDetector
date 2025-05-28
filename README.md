@@ -32,10 +32,11 @@ This project aims to classify real dog images vs. AI-generated dog images using 
 
 **Lack of Sensor Noise in AI-Generated Dog Images**
 
-Nightingale and Farid (2022) observed that AI-generated images often contain mismatches in local features. We similarly find that AI-generated dog images may show anomalies like strange or missing legs, which are rare in real photos and useful for distinguishing generated content.
+Nightingale and Farid (2022) observed that AI-generated images often contain mismatches in local features. We similarly find that AI-generated dog images may show anomalies like strange or missing legs, which are rare in real photos and useful for distinguishing generated content.  
 Reference: Nightingale & Farid, 2022. "Detection of GAN-generated imagery using statistical inconsistencies."
 
 <img src="https://github.com/user-attachments/assets/acff67f6-125b-474d-b290-62717060685f" width="400"/>
+
 <br/>
 
 **Frequency Artifacts in AI-Generated Images**
