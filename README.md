@@ -29,7 +29,13 @@ This project aims to classify real dog images vs. AI-generated dog images using 
    - Evaluate multiple models (CNN baseline, MLP variants with basic and engineered features) using consistent feature sets.
 
 ## Difference
-AI-generated images differ from real ones in several key visual aspects. Real photos—including those of dogs—exhibit natural textures (like fur strands), physical imperfections, and asymmetry. You can often see fine details such as uneven lighting, realistic shadows, and sensor noise. In contrast, AI-generated dog images may contain unnaturally smooth fur, distorted anatomy (e.g., too many limbs or misaligned eyes), and unrealistic lighting or shadows. These differences also extend to texture uniformity and missing breed-specific features. Our model captures and leverages these inconsistencies for accurate classification between real and AI-generated dog images.
+
+A study by Nightingale & Farid (2022) found that AI-generated faces are nearly indistinguishable from real ones, with human detection accuracy hovering around chance (50%). Even more surprisingly, participants rated synthetic faces as more trustworthy than real ones, highlighting the importance of robust detection tools like our model.
+
+Reference: Nightingale, S. J., & Farid, H. (2022). AI-synthesized faces are indistinguishable from real faces and more trustworthy. PNAS. https://doi.org/10.1073/pnas.2120481119
+
+AI-generated images are different from real ones in many ways. Real dog photos show natural textures like fur strands, small flaws, and realistic lighting. You can also see clear shadows and camera noise. AI-generated dog images may look too smooth, have strange body shapes, and show light or shadows that do not make sense. Sometimes, AI dogs also make movements or poses that real dogs cannot do. Our model uses these differences to tell real and AI-generated dog images apart.
+
 ![IMG_5167](https://github.com/user-attachments/assets/593eef45-dfdb-4bb0-b803-853a7445ad5a)
 
 
