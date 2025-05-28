@@ -13,7 +13,7 @@
    	2.3. [Repository Structure](#repository-structure)<br>
 3. [Methodology](#methodology)<br>
 	3.1. [Environment setup](#environment-setup)<br>
-	3.2. [Preprocess image data & Precompute feature tensors](#preprocess-image-data-&-precompute-feature-tensors)<br>
+	3.2. [Preprocess image data & Precompute feature tensors](#preprocess-image-data-precompute-feature-tensors)<br>
  	3.3. [Simple MLP Model](#simple-mlp-model)<br>
  	3.4. [Train Bayesian MLP and evaluate](#train-bayesian-mlp-and-evaluate)<br>
 	3.5. [CNN Model Experiments (End-to-End Models with ResNet50)](#cnn-model-experiments-end-to-end-models-with-resnet50)<br>
