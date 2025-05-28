@@ -32,11 +32,15 @@ This project aims to classify real dog images vs. AI-generated dog images using 
 
 **Lack of Sensor Noise in AI-Generated Dog Images**
 
-Inspired by the work of Nightingale and Farid (2022), we find that AI-generated dog images often show inconsistencies in local features such as missing legs. These artifacts are uncommon in real dog photos and help our model distinguish between real and generated images.
+Inspired by the work of Nightingale and Farid (2022), we find that AI-generated dog images often show inconsistencies in local features such as strange legs. These artifacts are uncommon in real dog photos and help our model distinguish between real and generated images.
+
+![ai_01762](https://github.com/user-attachments/assets/fb6dac3e-f2cd-489f-be25-355633df2fa3)
+
+Inspired by Durall et al. (2020), we note that AI-generated images often exhibit unnatural frequency artifacts, which differ from the smooth texture transitions found in real images.
 
 ![IMG_5167](https://github.com/user-attachments/assets/593eef45-dfdb-4bb0-b803-853a7445ad5a)
 
-AI-generated images are different from real ones in many ways. Real dog photos show natural textures like fur strands, small flaws, and realistic lighting. You can also see clear shadows and camera noise. AI-generated dog images may look too smooth, have strange body shapes, and show light or shadows that do not make sense. Sometimes, AI dogs also make movements or poses that real dogs cannot do. Our model uses these differences to tell real and AI-generated dog images apart.
+AI-generated dog images may look too smooth, have strange body shapes, and show light or shadows that do not make sense. Sometimes, AI dogs also make movements or poses that real dogs cannot do. Our model uses these differences to tell real and AI-generated dog images apart.
 
 # Data and Repository Structure 
 ## 📁 Dataset Structure
