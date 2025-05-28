@@ -76,23 +76,6 @@ RealOrAI-DogDetector/
 └── README.md                      # Project documentation (this file)
 ```
 
-- 📦 Feature Files
-
-Due to large file sizes, the **precomputed feature tensors** for training, validation, and testing are hosted externally.
-
-👉 [Click here to access the feature files on Google Drive](https://drive.google.com/drive/folders/1gDfxVEp0vZ-3u6BigSQOoL-PjhERqRJq?usp=drive_link)
-
-The available files include:
-
-- `features_train_*.pt` – Precomputed features for training set  
-- `features_val_*.pt` – Precomputed features for validation set  
-- `features_test_*.pt` – Precomputed features for test set  
-
-To use:
-1. Download the `.pt` files from the Google Drive link above.
-2. Place them in the root directory or update the paths in the notebooks accordingly.
-
-
 # Methodology
 
 This project followed a structured yet flexible approach to solving the problem of classifying real vs. AI-generated dog images. We explored multiple model types and feature engineering techniques to find the best balance between accuracy, speed, and interpretability.
@@ -118,6 +101,27 @@ We started with `data_clean.ipynb`, which handled all the image preprocessing. W
 
 All images were transformed into normalized tensors, ready for CNNs or embedding extraction.
 
+## Precompute feature tensors 
+`features_train_*.pt`
+`features_val_*.pt `
+`features_test_*.pt`
+
+We saved all our features as .pt files to speed things up during experimentation. The features_train_full.pt, features_val_full.pt, and features_test_full.pt files contained the original CNN-based embeddings from RGB images. 
+
+The features_train_plus.pt, features_val_plus.pt, and features_test_plus.pt files held the same embeddings but with the edge channel added.
+
+   - These precomputed tensors let us train MLPs in seconds instead of minutes
+   - The “plus” versions were consistently more effective than the originals
+   - We also made “cutted” versions of these files with smaller samples to use for quick debugging
+
+Due to large file sizes, the **precomputed feature tensors** for training, validation, and testing are hosted externally.
+
+👉 [Click here to access the feature files on Google Drive](https://drive.google.com/drive/folders/1gDfxVEp0vZ-3u6BigSQOoL-PjhERqRJq?usp=drive_link)
+
+To use:
+1. Download the `.pt` files from the Google Drive link above.
+2. Place them in the root directory or update the paths in the notebooks accordingly.
+
 ## Simple MLP Model
 
 `Simple_MLP.ipynb`
@@ -134,7 +138,7 @@ This model is efficient and performs well on extracted image features.
 ## Train Bayesian MLP and evaluate
 `Bayesian MLP Model_Train.ipynb`
 
-Once we had features extracted from the images, we trained our classifiers. 
+Once we had features extracted from the images, we trained our classifiers. This would served as our baseline models.
 
 We compared two types: a standard MLP and a Bayesian version that uses dropout to estimate uncertainty. 
 
@@ -144,20 +148,6 @@ These models didn’t operate on raw images—they were trained on precomputed f
    - - The big leap came when we fed it the enhanced (RGBA) features. With the plus features, the Bayesian MLP hit ~86% accuracy and gave us confidence scores for each prediction
        
 The Bayesian MLP (RGBA features) model made it easier to spot borderline cases or flag predictions the model wasn’t sure about.
-
-## Add edge channel to images 
-`Enhanced_Bayesian_MLP.ipynb`
-
-Next, we introduced edge detection to the images. Using Canny filters, we created a fourth channel that highlights edges—then combined it with the original RGB to form RGBA inputs. This was based on the idea that AI-generated images often have weird transitions or fuzzy outlines, and edge maps can help surface that.
-
-   - Converted RGB images to grayscale, then added a Canny edge map as a 4th channel
-   - Saved new image features as .pt tensors for fast reuse later
-   - Models trained on these “plus” features saw a ~6–7% bump in accuracy, especially when distinguishing subtle fakes
-
-#### Figure: Grad-CAM Heatmaps Revealing Model Attention Across Real and AI-Generated Dog Images
-![output](https://github.com/user-attachments/assets/6fdd6c85-adb7-456d-af1a-0792cb0cf90b)
-
-   - The heatmaps illustrate the regions the model focused on when classifying dog images across four prediction types. The model consistently attends to key visual features such as the nose, eyes, ears, and fur texture—suggesting it relies on these areas to distinguish between real and AI-generated dogs, regardless of classification correctness.
 
 ## CNN model experiments 
 `method_explore.ipynb`
@@ -169,18 +159,19 @@ To establish a benchmark, we fine-tuned a pretrained ResNet50. This was our stro
    - For fake dogs, the heatmaps were scattered—often lighting up irrelevant background or oddly shaped limbs
    - These visuals confirmed that even CNNs were picking up on the awkwardness of AI images
 
-## Precompute feature tensors 
-`features_train_*.pt`
-`features_val_*.pt `
-`features_test_*.pt`
+#### Figure: Grad-CAM Heatmaps Revealing Model Attention Across Real and AI-Generated Dog Images
+![output](https://github.com/user-attachments/assets/6fdd6c85-adb7-456d-af1a-0792cb0cf90b)
 
-We saved all our features as .pt files to speed things up during experimentation. The features_train_full.pt, features_val_full.pt, and features_test_full.pt files contained the original CNN-based embeddings from RGB images. 
+   - The heatmaps illustrate the regions the model focused on when classifying dog images across four prediction types. The model consistently attends to key visual features such as the nose, eyes, ears, and fur texture—suggesting it relies on these areas to distinguish between real and AI-generated dogs, regardless of classification correctness.
 
-The features_train_plus.pt, features_val_plus.pt, and features_test_plus.pt files held the same embeddings but with the edge channel added.
+## Add edge channel to images 
+`Enhanced_Bayesian_MLP.ipynb`
 
-   - These precomputed tensors let us train MLPs in seconds instead of minutes
-   - The “plus” versions were consistently more effective than the originals
-   - We also made “cutted” versions of these files with smaller samples to use for quick debugging
+Next, we introduced edge detection to the images. Using Canny filters, we created a fourth channel that highlights edges—then combined it with the original RGB to form RGBA inputs. This was based on the idea that AI-generated images often have weird transitions or fuzzy outlines, and edge maps can help surface that.
+
+   - Converted RGB images to grayscale, then added a Canny edge map as a 4th channel
+   - Saved new image features as .pt tensors for fast reuse later
+   - Models trained on these “plus” features saw a ~6–7% bump in accuracy, especially when distinguishing subtle fakes
 
 #### Figure: Original Images (Left) and Salient Feature Focus Captured by the Enhanced Model (Right)
 ![image](https://github.com/user-attachments/assets/7c8b3ee9-ecbb-4a5e-983f-01410897a639)
