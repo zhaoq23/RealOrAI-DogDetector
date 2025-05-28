@@ -5,8 +5,13 @@
 
 # Table of Contents
 1. [Problem Statement](#problem-statement)
+   	1.1 [Introduction](#introduction)
+   	1.2 [Distinguishing Real and AI-Generated Dog Images](#distinguishing-real-and-ai-generated-dog=images)
 2. [Data and Repository Structure](#data-and-repository-structure)
-3. [Methodology](#methodology)<br>
+   	2.1 [Dataset Structure](#data-structure)
+   	2.2 [Dataset Statistics](#data-statistics)
+   	2.3 [Repository Structure](#repository-structure) 
+5. [Methodology](#methodology)<br>
 	3.1. [Environment setup](#environment-setup)<br>
 	3.2. [Load and preprocess image data](#load-and-preprocess-image-data)<br>
 	3.3. [Add edge channel to images](#add-edge-channel-to-images)<br>
@@ -14,8 +19,8 @@
 	3.5. [Train Bayesian MLP and evaluate](#train-bayesian-mlp-and-evaluate)<br>
 	3.6. [Precompute feature tensors](#precompute-feature-tensors)<br>
  	3.7. [Widget](#widget)<br>
-4. [Results](#results)
-5. [Final Takeaways and Next Steps](#final-takeaways-and-next-steps)
+6. [Results](#results)
+7. [Final Takeaways and Next Steps](#final-takeaways-and-next-steps)
 
 # Problem Statement
 ## Introduction
