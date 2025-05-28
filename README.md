@@ -67,6 +67,7 @@ We provide two versions of the dataset:
 ## Repository Structure
 Our GitHub repository is organized as follows:
 
+```text
 RealOrAI-DogDetector/
 ├── 1_data_process.ipynb           # Preprocesses image data and extracts features
 ├── 2_Simple_MLP.ipynb             # Trains a simple MLP classifier
