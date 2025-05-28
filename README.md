@@ -175,29 +175,45 @@ We then used **GradCAM++** to visualize attention:
 #### Figure: Grad-CAM Heatmaps Revealing Model Attention Across Real and AI-Generated Dog Images
 <img src="https://github.com/user-attachments/assets/6fdd6c85-adb7-456d-af1a-0792cb0cf90b" width="400"/>
 
-
 These insights led us to test **snout-focused edge enhancement** using RGBA input. The model maintained ~95% accuracy—indicating CNNs already learn edge features well.
 
 Next, we developed a **dual-branch model** (full image + cropped leg) to emphasize **leg structure**, achieving:
 - 100% train / 98% validation accuracy on random data  
-- But signs of **overfitting** due to small sample size and high capacity
+- But signs of **overfitting** emerged due to small sample size and model complexity
 
-Adding **dropout regularization** caused instability and underfitting, with validation accuracy peaking at 86%.
+Regularization was introduced (dropout), but validation accuracy dropped to ~86% and became unstable.
 
-**Summary:** CNNs provide strong spatial reasoning, and GradCAM helps us interpret it. While leg-focused fusion models show promise, overfitting remains a challenge in small data regimes.
+**Summary:** Despite CNNs’ ability to localize important visual cues, their performance was consistently below our optimized **Bayesian MLP**, which reached up to **99% validation accuracy**. Additionally, CNN models are **30–50× slower** than MLPs and **require GPUs to run**, making them impractical for lightweight deployment. While leg-focused fusion models are conceptually promising, they are highly prone to overfitting and computationally expensive.
 
-## Add edge channel to images 
+
+## Enhanced MLP with Leg-Based Feature (Final Model)
 `Enhanced_Bayesian_MLP.ipynb`
 
-Next, we introduced edge detection to the images. Using Canny filters, we created a fourth channel that highlights edges—then combined it with the original RGB to form RGBA inputs. This was based on the idea that AI-generated images often have weird transitions or fuzzy outlines, and edge maps can help surface that.
+Due to the inconsistent performance of our CNN models on randomly sampled data (~86% validation accuracy), we suspected that our **model capacity might be too large** for the **limited 2,000-image dataset**. To test this, we trained multiple CNN variants on the **full dataset** using GPU acceleration.
 
-   - Converted RGB images to grayscale, then added a Canny edge map as a 4th channel
-   - Saved new image features as .pt tensors for fast reuse later
-   - Models trained on these “plus” features saw a ~6–7% bump in accuracy, especially when distinguishing subtle fakes
+We explored three end-to-end CNNs, including one with **4-channel RGBA input**, where the fourth channel represents **edge information extracted from the image**. This edge-aware input helps CNNs emphasize object boundaries (e.g., legs, facial structure) that often appear distorted in AI-generated images. However, all three models exhibited **high variance in validation accuracy** (large performance fluctuations between epochs), likely due to:
+- Noisy or redundant features from full images
+- Difficulty in aligning edge maps with RGB signals
+- Overfitting risk from excessive parameters vs. signal quality
+
+#### Figure: Training and Validation Accuracy of the 4-Channel RGBA CNN Model
+<img src="https://github.com/user-attachments/assets/6b97b434-1d6f-4dc3-b2c9-e0e6eb5b0636" width="300"/>
+
+Given these challenges, we reverted to our **Bayesian MLP baseline** and focused on **augmenting it with leg-specific information**. Specifically, we:
+- Used YOLOv5 to detect the dog’s bounding box
+- Calculated the **grayscale brightness difference** between the full image and the leg region
+- Appended this scalar as an **additional input feature**
+
+This lightweight enhancement yielded strong results:
+- Validation accuracy: **99.13%**
+- ~30 more correctly classified samples compared to the vanilla MLP
+- Grad-CAM visualizations showed improved sensitivity to **subtle leg structures, facial features, and expression cues**
 
 #### Figure: Original Images (Left) and Salient Feature Focus Captured by the Enhanced Model (Right)
-<img src="https://github.com/user-attachments/assets/7c8b3ee9-ecbb-4a5e-983f-01410897a639" width="400" height="300"/>
-<img src="https://github.com/user-attachments/assets/86f0d1f3-d765-49de-adef-6480dc475219" width="400" height="300"/>
+<img src="https://github.com/user-attachments/assets/7c8b3ee9-ecbb-4a5e-983f-01410897a639" width="400" height="500"/>
+<img src="https://github.com/user-attachments/assets/86f0d1f3-d765-49de-adef-6480dc475219" width="400" height="500"/> 
+
+**Conclusion:** While deep CNNs were powerful but unstable, our final MLP with a leg-aware scalar feature struck the best balance between interpretability, efficiency, and accuracy.
 
 
 ## Widget
