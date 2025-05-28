@@ -210,8 +210,8 @@ This lightweight enhancement yielded strong results:
 - Grad-CAM visualizations showed improved sensitivity to **subtle leg structures, facial features, and expression cues**
 
 #### Figure: Original Images (Left) and Salient Feature Focus Captured by the Enhanced Model (Right)
-<img src="https://github.com/user-attachments/assets/7c8b3ee9-ecbb-4a5e-983f-01410897a639" width="440" height="700"/>
-<img src="https://github.com/user-attachments/assets/86f0d1f3-d765-49de-adef-6480dc475219" width="440" height="700"/> 
+<img src="https://github.com/user-attachments/assets/7c8b3ee9-ecbb-4a5e-983f-01410897a639" width="420" height="700"/>
+<img src="https://github.com/user-attachments/assets/86f0d1f3-d765-49de-adef-6480dc475219" width="420" height="700"/> 
 
 **Conclusion:** While deep CNNs were powerful but unstable, our final MLP with a leg-aware scalar feature struck the best balance between interpretability, efficiency, and accuracy.
 
