@@ -197,7 +197,7 @@ We explored three end-to-end CNNs, including one with **4-channel RGBA input**, 
 - Overfitting risk from excessive parameters vs. signal quality
 
 #### Figure: Training and Validation Accuracy of the 4-Channel RGBA CNN Model
-<img src="https://github.com/user-attachments/assets/6b97b434-1d6f-4dc3-b2c9-e0e6eb5b0636" width="300"/>
+<img src="https://github.com/user-attachments/assets/6b97b434-1d6f-4dc3-b2c9-e0e6eb5b0636" width="400"/>
 
 Given these challenges, we reverted to our **Bayesian MLP baseline** and focused on **augmenting it with leg-specific information**. Specifically, we:
 - Used YOLOv5 to detect the dog’s bounding box
@@ -248,7 +248,7 @@ The plusdiff model was the clear winner—it combined smart inputs with uncertai
 | `plusdiff_model.pt` | CLIP embeddings + RGBA edge detection | 99.1%        | 99.0%         | 99.0%      | Best performance overall. Edge detection helps improve AI image detection accuracy. |
 
 #### Figure: Accuracy Comparison between Baseline Model and Enhanced Model
-![image](https://github.com/user-attachments/assets/1667047e-1716-4538-907e-4f735e145ed3)
+<img src="https://github.com/user-attachments/assets/1667047e-1716-4538-907e-4f735e145ed3" width="400"/>
 
 
 # Final Takeaways and Next Steps
@@ -257,8 +257,11 @@ The plusdiff model was the clear winner—it combined smart inputs with uncertai
    - The plusdiff model, which combines CLIP embeddings with RGBA edge detection, showed the strongest performance with over 99% accuracy, precision, and recall.
    - Adding edge-based features helped the model better detect subtle patterns often missed in AI-generated images, especially around fur texture and outlines.
    - The baseline model still performed well, but struggled slightly more with edge cases and synthetic artifacts.
+   - Surprisingly, deep CNNs like ResNet50 were unstable on small or imbalanced datasets and required heavy GPU resources and long training times.
+   - The Bayesian MLP, though simpler, aligned better with the dataset's structure—highlighting that model effectiveness depends more on task-data fit than on architectural complexity.
 
 ## What's Next?
    - Expand the dataset to introduce more variety in dog breeds, image resolutions, and generative models to improve robustness.
-
-
+   - Investigate overfitting mitigation strategies, such as data augmentation, dropout tuning, or semi-supervised learning, especially for high-capacity CNN architectures.
+   - Explore hard negative mining or contrastive learning approaches to improve generalization on edge cases and reduce reliance on superficial cues.
+   - Current models perform well on the existing dataset but often fail to generalize to new AI-generated images. This underscores the need for more diverse and realistic validation sets to enhance both interpretability and real-world effectiveness.
