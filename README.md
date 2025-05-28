@@ -30,14 +30,11 @@ This project aims to classify real dog images vs. AI-generated dog images using 
 
 # Difference
 
-A study by Nightingale & Farid (2022) found that AI-generated faces are nearly indistinguishable from real ones, with human detection accuracy hovering around chance (50%). Even more surprisingly, participants rated synthetic faces as more trustworthy than real ones, highlighting the importance of robust detection tools like our model.
-
-Reference: Nightingale, S. J., & Farid, H. (2022). AI-synthesized faces are indistinguishable from real faces and more trustworthy. PNAS. https://doi.org/10.1073/pnas.2120481119
-
-AI-generated images are different from real ones in many ways. Real dog photos show natural textures like fur strands, small flaws, and realistic lighting. You can also see clear shadows and camera noise. AI-generated dog images may look too smooth, have strange body shapes, and show light or shadows that do not make sense. Sometimes, AI dogs also make movements or poses that real dogs cannot do. Our model uses these differences to tell real and AI-generated dog images apart.
+** Lack of Sensor Noise in AI-Generated Dog Images ** Inspired by the work of Nightingale and Farid (2022), we find that AI-generated dog images often show inconsistencies in local features such as mismatched eyes or ears. These artifacts are uncommon in real dog photos and help our model distinguish between real and generated images.
 
 ![IMG_5167](https://github.com/user-attachments/assets/593eef45-dfdb-4bb0-b803-853a7445ad5a)
 
+AI-generated images are different from real ones in many ways. Real dog photos show natural textures like fur strands, small flaws, and realistic lighting. You can also see clear shadows and camera noise. AI-generated dog images may look too smooth, have strange body shapes, and show light or shadows that do not make sense. Sometimes, AI dogs also make movements or poses that real dogs cannot do. Our model uses these differences to tell real and AI-generated dog images apart.
 
 # Data and Repository Structure 
 ## 📁 Dataset Structure
@@ -47,8 +44,6 @@ We use the [AI-Generated Dogs vs. Real Dogs Dataset](https://www.kaggle.com/data
 - `Labels/`: Ground-truth labels (`0` = real dog, `1` = AI-generated)
 
 We provide two versions of the dataset:
-
----
 
 ### 📊 Dataset Statistics
 
