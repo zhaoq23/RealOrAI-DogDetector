@@ -159,20 +159,32 @@ These models didn’t operate on raw images—they were trained on precomputed f
        
 The Bayesian MLP (RGBA features) model made it easier to spot borderline cases or flag predictions the model wasn’t sure about.
 
-## CNN model experiments 
+## 🧠 CNN Model Experiments (End-to-End Models with ResNet50)
 `method_explore.ipynb`
 
-To establish a benchmark, we fine-tuned a pretrained ResNet50. This was our strongest model out-of-the-box. The goal was to see how a CNN with deep spatial understanding would perform compared to the lightweight MLPs we planned to train later. We also used GradCAM++ to visualize where the network was “looking.”
+To go beyond the DINO+MLP baseline, we explored a series of **end-to-end CNN models** based on **ResNet50**. Unlike our MLP models that rely on pre-extracted features, these CNNs **learn directly from images**, combining feature extraction and classification in one pipeline.
 
-   - ResNet50 hit ~87% accuracy on the validation set
-   - GradCAM++ showed that for real dogs, attention centered on ears, snouts, and fur texture
-   - For fake dogs, the heatmaps were scattered—often lighting up irrelevant background or oddly shaped limbs
-   - These visuals confirmed that even CNNs were picking up on the awkwardness of AI images
+Because of their heavy training cost (dozens of times slower than MLPs), we used two validation strategies:
+- **Cutted dataset**: 97% validation accuracy with standard ResNet50
+- **Random subsamples**: 95% accuracy on 2k train / 1k val images from full dataset
+
+We then used **GradCAM++** to visualize attention:
+- For real dogs: focused on **nose, ears, and fur texture**
+- For AI images: attention was **scattered**, often irrelevant or misaligned
 
 #### Figure: Grad-CAM Heatmaps Revealing Model Attention Across Real and AI-Generated Dog Images
-![output](https://github.com/user-attachments/assets/6fdd6c85-adb7-456d-af1a-0792cb0cf90b)
+<img src="https://github.com/user-attachments/assets/6fdd6c85-adb7-456d-af1a-0792cb0cf90b" width="400"/>
 
-   - The heatmaps illustrate the regions the model focused on when classifying dog images across four prediction types. The model consistently attends to key visual features such as the nose, eyes, ears, and fur texture—suggesting it relies on these areas to distinguish between real and AI-generated dogs, regardless of classification correctness.
+
+These insights led us to test **snout-focused edge enhancement** using RGBA input. The model maintained ~95% accuracy—indicating CNNs already learn edge features well.
+
+Next, we developed a **dual-branch model** (full image + cropped leg) to emphasize **leg structure**, achieving:
+- 100% train / 98% validation accuracy on random data  
+- But signs of **overfitting** due to small sample size and high capacity
+
+Adding **dropout regularization** caused instability and underfitting, with validation accuracy peaking at 86%.
+
+**Summary:** CNNs provide strong spatial reasoning, and GradCAM helps us interpret it. While leg-focused fusion models show promise, overfitting remains a challenge in small data regimes.
 
 ## Add edge channel to images 
 `Enhanced_Bayesian_MLP.ipynb`
