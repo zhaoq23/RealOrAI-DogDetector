@@ -18,6 +18,7 @@
 5. [Final Takeaways and Next Steps](#final-takeaways-and-next-steps)
 
 # Problem Statement
+## Introduction
 
 AI-generated content is getting eerily real, especially with the recent release of Google Veo3, which can now generate hyper-realistic videos.
 
@@ -28,11 +29,12 @@ This project aims to classify real dog images vs. AI-generated dog images using 
    - Use Bayesian methods for uncertainty-aware predictions.
    - Evaluate multiple models (CNN baseline, MLP variants with basic and engineered features) using consistent feature sets.
 
-# Difference
+## Distinguishing Real and AI-Generated Dog Images
 
 **Lack of Sensor Noise in AI-Generated Dog Images**
 
-Nightingale and Farid (2022) observed that AI-generated images often contain mismatches in local features. We similarly find that AI-generated dog images may show anomalies like strange or missing legs, which are rare in real photos and useful for distinguishing generated content.  
+Nightingale and Farid (2022) observed that AI-generated images often contain mismatches in local features. We similarly find that AI-generated dog images may show anomalies like strange or missing legs, which are rare in real photos and useful for distinguishing generated content.
+
 Reference: Nightingale & Farid, 2022. "Detection of GAN-generated imagery using statistical inconsistencies."
 
 <img src="https://github.com/user-attachments/assets/acff67f6-125b-474d-b290-62717060685f" width="400"/> <br><br>
@@ -40,6 +42,7 @@ Reference: Nightingale & Farid, 2022. "Detection of GAN-generated imagery using 
 **Frequency Artifacts in AI-Generated Images**
 
 According to Durall et al. (2020), AI-generated images tend to exhibit unnatural frequency patterns. These differ from the smooth transitions in real images and can be leveraged to detect synthetic content.
+
 Reference: Durall et al., 2020. "Unmasking DeepFakes with Simple Features." [arXiv]
 
 <img src="https://github.com/user-attachments/assets/593eef45-dfdb-4bb0-b803-853a7445ad5a" width="600"/> <br><br>
