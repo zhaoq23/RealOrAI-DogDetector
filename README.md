@@ -29,10 +29,58 @@ This project aims to classify real dog images vs. AI-generated dog images using 
    - Evaluate multiple models (CNN baseline, MLP variants with basic and engineered features) using consistent feature sets.
 
 # Data and Repository Structure 
-## Data
-<a href='[https://www.kaggle.com/datasets/kaustubhdhote/human-faces-dataset](https://www.kaggle.com/datasets/albertobircoci/ai-generated-dogs-jpg-vs-real-dogs-jpg)'>Our Kaggle dataset</a> contains a directory with real and AII generated dog images. The data is organized into three main subsets: Train, Validation, and Test. 
+## 📁 Dataset Structure
 
-Each subset contains two subdirectories: Images and Labels. The Labels folder indicates the origin of each image, with 0 for real dog images and 1 for AI-generated ones. 
+We use the [AI-Generated Dogs vs. Real Dogs Dataset](https://www.kaggle.com/datasets/albertobircoci/ai-generated-dogs-jpg-vs-real-dogs-jpg), which contains a collection of real and AI-generated dog images. The data is organized into three main subsets: **Train**, **Validation**, and **Test**. Each subset contains two folders:
+
+- `Images/`: The JPEG files used as input
+- `Labels/`: Corresponding labels (`0` for real dogs, `1` for AI-generated dogs)
+
+---
+### 📊 Full Dataset Statistics
+=== Train ===
+Total images: 18,605
+Total labels: 18,605
+1 (AI-generated): 4,200
+0 (Real): 14,405
+
+=== Validation ===
+Total images: 5,317
+Total labels: 5,317
+1 (AI-generated): 1,200
+0 (Real): 4,117
+
+=== Test ===
+Total images: 2,658
+Total labels: 2,658
+1 (AI-generated): 600
+0 (Real): 2,058
+
+
+---
+### 🧪 Cutted Validation Subset (Balanced Sample for Debugging/Testing)
+
+To facilitate fast prototyping and lightweight model validation, we also provide a **Cutted** version of the dataset with balanced classes:
+
+=== Train ===
+Total images: 344
+Total labels: 344
+1 (AI-generated): 172
+0 (Real): 172
+
+=== Validation ===
+Total images: 100
+Total labels: 100
+1 (AI-generated): 50
+0 (Real): 50
+
+=== Test ===
+Total images: 50
+Total labels: 50
+1 (AI-generated): 25
+0 (Real): 25
+
+This structure supports both full-scale model training and quick experimentation.
 
 ## Repository Structure
 Our GitHub repository is organized as follows:
