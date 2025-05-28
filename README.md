@@ -74,13 +74,13 @@ Our GitHub repository is organized as follows:
 
 ```text
 RealOrAI-DogDetector/
-├── 1_data_process.ipynb           # Preprocesses image data and extracts features
+├── 1_Data_Process.ipynb           # Preprocesses image data and extracts features
 ├── 2_Simple_MLP.ipynb             # Trains a simple MLP classifier
 ├── 3_Bayesian_MLP_Model_Train.ipynb  # Trains a Bayesian MLP model with uncertainty estimation
-├── 4_method_explore.ipynb         # Explores CNN architectures (e.g., ResNet50) and compares methods
+├── 4_Method_Explore.ipynb         # Explores CNN architectures (e.g., ResNet50) and compares methods
 ├── 5_Enhanced_Bayesian_MLP.ipynb  # Adds edge detection (RGBA) for improved Bayesian performance
-├── 6_classify_new_image.ipynb     # Classifies a custom image (real vs AI-generated)
-├── models/
+├── 6_Classify_New_Image.ipynb     # Classifies a custom image (real vs AI-generated)
+├── Models/
 │   ├── baseline_model.pt          # Trained baseline model with standard features
 │   └── plusdiff_model.pt          # Trained enhanced model with edge-aware features
 └── README.md                      # Project documentation (this file)
@@ -105,7 +105,7 @@ from transformers import AutoFeatureExtractor, AutoModel
 ```
 
 ## Load and preprocess image data
-`data_clean.ipynb`
+`Data_Process.ipynb`
 
 We started with `data_clean.ipynb`, which handled all the image preprocessing. We loaded our dataset of real and fake dog images, resized them to 224x224 pixels, normalized them using standard ImageNet stats, and wrapped everything in PyTorch Dataloaders. This gave us a clean, consistent input pipeline to use across all the different modeling approaches.
 
@@ -160,7 +160,7 @@ These models didn’t operate on raw images—they were trained on precomputed f
 The Bayesian MLP (RGBA features) model made it easier to spot borderline cases or flag predictions the model wasn’t sure about.
 
 ## CNN Model Experiments (End-to-End Models with ResNet50)
-`method_explore.ipynb`
+`Method_Explore.ipynb`
 
 To go beyond the DINO+MLP baseline, we explored a series of **end-to-end CNN models** based on **ResNet50**. Unlike our MLP models that rely on pre-extracted features, these CNNs **learn directly from images**, combining feature extraction and classification in one pipeline.
 
