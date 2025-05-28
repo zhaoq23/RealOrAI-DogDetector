@@ -28,6 +28,10 @@ This project aims to classify real dog images vs. AI-generated dog images using 
    - Use Bayesian methods for uncertainty-aware predictions.
    - Evaluate multiple models (CNN baseline, MLP variants with basic and engineered features) using consistent feature sets.
 
+## Difference
+AI-generated images differ from real ones in several key visual aspects. Real photos—including those of dogs—exhibit natural textures (like fur strands), physical imperfections, and asymmetry. You can often see fine details such as uneven lighting, realistic shadows, and sensor noise. In contrast, AI-generated dog images may contain unnaturally smooth fur, distorted anatomy (e.g., too many limbs or misaligned eyes), and unrealistic lighting or shadows. These differences also extend to texture uniformity and missing breed-specific features. Our model captures and leverages these inconsistencies for accurate classification between real and AI-generated dog images.
+![ai](https://github.com/user-attachments/assets/16d274f6-cd41-4212-9939-d389a2c1d9c3)
+
 # Data and Repository Structure 
 ## 📁 Dataset Structure
 We use the [AI-Generated Dogs vs. Real Dogs Dataset](https://www.kaggle.com/datasets/albertobircoci/ai-generated-dogs-jpg-vs-real-dogs-jpg), which contains a collection of real and AI-generated dog images. The data is organized into three main subsets: **Train**, **Validation**, and **Test**, each with:
