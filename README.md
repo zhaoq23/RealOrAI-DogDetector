@@ -162,7 +162,7 @@ Once we had features extracted from the images, we trained our classifiers. This
 We compared two types: a standard MLP and a Bayesian version that uses dropout to estimate uncertainty. 
 
 These models didn’t operate on raw images—they were trained on precomputed feature tensors (either from RGB images or the edge-enhanced RGBA ones).
-   - The baseline MLP trained on regular RGB features achieved ~99% accuracy
+   - The Bayesian MLP trained on regular RGB features achieved ~99% accuracy
        
 The Bayesian MLP (RGBA features) model made it easier to spot borderline cases or flag predictions the model wasn’t sure about.
 
