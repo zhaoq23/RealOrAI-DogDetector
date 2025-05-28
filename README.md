@@ -30,57 +30,28 @@ This project aims to classify real dog images vs. AI-generated dog images using 
 
 # Data and Repository Structure 
 ## 📁 Dataset Structure
+We use the [AI-Generated Dogs vs. Real Dogs Dataset](https://www.kaggle.com/datasets/albertobircoci/ai-generated-dogs-jpg-vs-real-dogs-jpg), which contains a collection of real and AI-generated dog images. The data is organized into three main subsets: **Train**, **Validation**, and **Test**, each with:
 
-We use the [AI-Generated Dogs vs. Real Dogs Dataset](https://www.kaggle.com/datasets/albertobircoci/ai-generated-dogs-jpg-vs-real-dogs-jpg), which contains a collection of real and AI-generated dog images. The data is organized into three main subsets: **Train**, **Validation**, and **Test**. Each subset contains two folders:
+- `Images/`: Input JPEG images  
+- `Labels/`: Ground-truth labels (`0` = real dog, `1` = AI-generated)
 
-- `Images/`: The JPEG files used as input
-- `Labels/`: Corresponding labels (`0` for real dogs, `1` for AI-generated dogs)
-
----
-### 📊 Full Dataset Statistics
-=== Train ===
-Total images: 18,605
-Total labels: 18,605
-1 (AI-generated): 4,200
-0 (Real): 14,405
-
-=== Validation ===
-Total images: 5,317
-Total labels: 5,317
-1 (AI-generated): 1,200
-0 (Real): 4,117
-
-=== Test ===
-Total images: 2,658
-Total labels: 2,658
-1 (AI-generated): 600
-0 (Real): 2,058
-
+We provide two versions of the dataset:
 
 ---
-### 🧪 Cutted Validation Subset (Balanced Sample for Debugging/Testing)
 
-To facilitate fast prototyping and lightweight model validation, we also provide a **Cutted** version of the dataset with balanced classes:
+### 📊 Dataset Statistics
 
-=== Train ===
-Total images: 344
-Total labels: 344
-1 (AI-generated): 172
-0 (Real): 172
+| Subset      | Version     | Total Images | AI-generated (`1`) | Real (`0`) |
+|-------------|-------------|--------------|---------------------|------------|
+| **Train**   | Full        | 18,605       | 4,200               | 14,405     |
+|             | Cutted      | 344          | 172                 | 172        |
+| **Valid**   | Full        | 5,317        | 1,200               | 4,117      |
+|             | Cutted      | 100          | 50                  | 50         |
+| **Test**    | Full        | 2,658        | 600                 | 2,058      |
+|             | Cutted      | 50           | 25                  | 25         |
 
-=== Validation ===
-Total images: 100
-Total labels: 100
-1 (AI-generated): 50
-0 (Real): 50
+> 💡 The **Cutted** version is a lightweight, balanced subset useful for quick debugging, prototyping, or reproducibility testing, while the **Full** version supports large-scale training and evaluation.
 
-=== Test ===
-Total images: 50
-Total labels: 50
-1 (AI-generated): 25
-0 (Real): 25
-
-This structure supports both full-scale model training and quick experimentation.
 
 ## Repository Structure
 Our GitHub repository is organized as follows:
