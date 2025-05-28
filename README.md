@@ -68,16 +68,16 @@ We provide two versions of the dataset:
 Our GitHub repository is organized as follows:
 
 RealOrAI-DogDetector/
-├── 1_data_process.ipynb             # Preprocesses image data and extracts features
-├── 2_Simple_MLP.ipynb               # Trains a simple MLP classifier
-├── 3_Bayesian MLP Model_Train.ipynb # Trains a Bayesian MLP model with uncertainty estimation
-├── 4_method_explore.ipynb           # Explores CNN architectures (e.g., ResNet50) and compares methods
-├── 5_Enhanced_Bayesian_MLP.ipynb    # Adds edge detection (RGBA) for improved Bayesian performance
-├── 6_classify_new_image.ipynb       # Classifies a custom image (real vs AI-generated)
+├── 1_data_process.ipynb           # Preprocesses image data and extracts features
+├── 2_Simple_MLP.ipynb             # Trains a simple MLP classifier
+├── 3_Bayesian_MLP_Model_Train.ipynb  # Trains a Bayesian MLP model with uncertainty estimation
+├── 4_method_explore.ipynb         # Explores CNN architectures (e.g., ResNet50) and compares methods
+├── 5_Enhanced_Bayesian_MLP.ipynb  # Adds edge detection (RGBA) for improved Bayesian performance
+├── 6_classify_new_image.ipynb     # Classifies a custom image (real vs AI-generated)
 ├── models/
-│   ├── baseline_model.pt            # Trained baseline model with standard features
-│   └── plusdiff_model.pt            # Trained enhanced model with edge-aware features
-├── README.md                        # Project documentation (this file)
+│   ├── baseline_model.pt          # Trained baseline model with standard features
+│   └── plusdiff_model.pt          # Trained enhanced model with edge-aware features
+└── README.md                      # Project documentation (this file)
 
 
 - 📦 Feature Files
