@@ -38,10 +38,11 @@ Reference: Nightingale & Farid, 2022. "Detection of GAN-generated imagery using 
 <img src="https://github.com/user-attachments/assets/acff67f6-125b-474d-b290-62717060685f" width="400"/>
 
 **Frequency Artifacts in AI-Generated Images**
+
 According to Durall et al. (2020), AI-generated images tend to exhibit unnatural frequency patterns. These differ from the smooth transitions in real images and can be leveraged to detect synthetic content.
 Reference: Durall et al., 2020. "Unmasking DeepFakes with Simple Features." [arXiv]
 
-![IMG_5167](https://github.com/user-attachments/assets/593eef45-dfdb-4bb0-b803-853a7445ad5a)
+<img src="https://github.com/user-attachments/assets/593eef45-dfdb-4bb0-b803-853a7445ad5a" width="600"/>
 
 AI-generated dog images may look too smooth, have strange body shapes, and show light or shadows that do not make sense. Sometimes, AI dogs also make movements or poses that real dogs cannot do. Our model uses these differences to tell real and AI-generated dog images apart.
 
